@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.spring.project2_test.member.vo.MemberVO" alias="memberVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.DetailVO" alias="detailVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.ImageVO" alias="imageVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.ReviewVO" alias="reviewVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.DetailReviewVO" alias="detailReviewVO" />
+    <typeAlias type="com.spring.project2_test.reviewList.vo.ReviewListVO" alias="reviewListVO" />
+    <typeAlias type="com.spring.project2_test.search.vo.SearchVO" alias="searchVO" />
+    <typeAlias type="com.spring.project2_test.main.vo.MainVO" alias="mainVO" />
+	<typeAlias type="com.spring.project2_test.newList.vo.NewListVO" alias="newListVO" />	
+	<typeAlias type="com.spring.project2_test.newList.vo.NewListVO2" alias="newListVO2" />
+    <typeAlias type="com.spring.project2_test.reconList.vo.ReconListVO" alias="reconListVO" />
+    <typeAlias type="com.spring.project2_test.specList.vo.SpecListVO" alias="specListVO" />
+    
+<!-- typeAliases on vo -->
+
+    
+  </typeAliases>
+</configuration>
+
+
+

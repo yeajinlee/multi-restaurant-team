@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.newlist">
+	<resultMap type="newListVO" id="newListResult">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_View"/>
+		<result property="rest_fileName" column="rest_fileName"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+	</resultMap>
+		<resultMap type="newListVO" id="defaultListResult">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_View"/>
+		<result property="rest_fileName" column="rest_fileName"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+	</resultMap>
+		<select id="selectNewList" resultMap="newListResult">
+<!--             미사용             -->		<![CDATA[
+select ri.rest_NO, ri.rest_Name, ri.rest_Price, ri.rest_Address, ri.rest_fileName, ri.rest_Scope 
+from Restaurant_Info ri, User_Info ui where ri.rest_Address=ui.user_city order by rest_OpenDate
+		]]>
+	</select> <!--             미사용             -->
+			<select id="defaultNewList" resultMap="defaultListResult">
+		<![CDATA[
+select ri.rest_OpenDate, ri.rest_NO, ri.rest_Name, ri.rest_Price, ri.rest_Address, ri.rest_fileName, ri.rest_Scope 
+from Restaurant_Info ri order by rest_OpenDate desc
+		]]>
+	</select>
+	
+	
+	</mapper>

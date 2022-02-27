@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.detail">
+	<resultMap type="detailVO" id="detailResult">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Phone" column="rest_Phone"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_Social"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+		<result property="rest_Theme" column="rest_Theme"/>
+		<result property="img_Filename" column="img_Filename"/>
+	</resultMap>
+	<resultMap type="imageVO" id="imageResult">
+		<result property="img_FileNO" column="img_FileNO"/>
+		<result property="img_FileName" column="img_FileName"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="rest_NO" column="rest_NO" />
+	</resultMap>
+	<resultMap type="reviewVO" id="detailReviewResult">
+		<result property="user_ID" column="user_ID"/>
+		<result property="user_Nickname" column="user_Nickname"/>
+		<result property="user_Level" column="user_Level"/>
+		<result property="user_Profile" column="user_Profile"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="review_Scope" column="review_Scope"/>
+		<result property="review_Text" column="review_Text"/>
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="review_Date" column="review_Date"/>
+		<result property="images" column="images"/>
+	</resultMap>
+	<select id="selectRestDetail" resultMap="detailResult">
+		<![CDATA[
+			select * from Restaurant_Info where rest_NO = #{rest_NO}
+		]]>
+	</select>
+	<select id="selectRestImg" resultMap="imageResult">
+		<![CDATA[
+			select img_FileName from reviewimg_info where rest_NO = #{rest_NO} order by img_fileno desc
+		]]>
+	</select>
+	<select id="selectAllReview" resultMap="detailReviewResult">
+		<![CDATA[
+			select * from profile_review where rest_NO = #{rest_NO} order by review_no desc
+		]]>
+	</select>
+	<select id="selectSideList" resultMap="detailResult">
+		<![CDATA[
+			select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_Theme, b.rest_opendate, a.img_filename 
+			from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+			inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6
+		]]>
+	</select>
+	<!-- <insert id="addNewReview" parameterType="reveiwVO">
+		<![CDATA[
+			insert into review_info(review_NO, user_ID, review_Scope, review_Text, rest_NO, reveiw_Date)
+			values(review_seq, #{user_ID}, #{review_Scope}, #{review_Text}, #{rest_NO}, sysdate)
+		]]>
+	</insert>
+	<insert id="addNewReviewImg" parameterType="reveiwVO">
+		<foreach collection="list" item="item" open="insert all" separator=" " close="select * from dual">
+			into reviewimg_info (img_FileNO, img_FileName, review_NO, rest_NO)
+			values (reviewIMG_seq, #{item.img_FileName, #{item.review_NO}, #{item.rest_NO})
+		</foreach>
+	</insert> -->
+	
+	<select id="countReview" resultType="int">
+		<![CDATA[
+			select count(*) from review_info where rest_NO = #{rest_NO}
+		]]>
+	</select>
+</mapper>

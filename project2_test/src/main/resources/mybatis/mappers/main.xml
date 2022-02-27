@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.main">
+	<resultMap type="mainVO" id="mainResult">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Phone" column="rest_Phone"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_Social"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+		<result property="rest_Theme" column="rest_Theme"/>
+		<result property="img_FileName" column="img_FileName"/>
+	</resultMap>
+	
+	
+	<select id="selectRestList" resultMap="mainResult">
+		<![CDATA[
+
+			select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_theme, b.rest_opendate, a.img_filename 
+			from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+			inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7
+
+		]]>
+	</select>
+	
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap id="memberResult" type="MemberVO">
+		<result property="user_ID" column="user_ID" />
+		<result property="user_PW" column="user_PW" />
+		<result property="user_Nickname" column="user_Nickname" />
+		<result property="user_Birth" column="user_Birth" />
+		<result property="user_Gender" column="user_Gender" />
+		<result property="user_City" column="user_City" />
+		<result property="user_Email" column="user_Email" />
+		<result property="user_Phone" column="user_Phone" />
+		<result property="user_Level" column="user_Level" />
+		<result property="user_Profile" column="user_Profile" />
+	</resultMap>
+
+	<select id="loginById" resultType="memberVO"
+		parameterType="java.util.Map">
+	    <![CDATA[
+			select user_ID, user_PW from User_Info
+			 where user_ID=#{user_ID}
+			 and user_PW=#{user_PW}			
+		]]>
+	</select>
+	
+
+
+	<insert id="insertMember" parameterType="memberVO">
+  <![CDATA[
+    	insert into User_Info(user_ID,user_PW,user_Nickname,
+                              user_Birth,user_Gender,user_City,
+                              user_Email,user_Phone)
+                                    
+	   				   values(#{user_ID},#{user_PW},#{user_Nickname},
+                              #{user_Birth},#{user_Gender},#{user_City},
+                              #{user_Email},#{user_Phone})
+   ]]>
+	</insert>
+
+	
+
+</mapper>

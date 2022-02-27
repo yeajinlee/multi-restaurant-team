@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.review">
+	<resultMap type="reviewListVO" id="reviewResult">
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="user_ID" column="user_ID"/>
+		<result property="user_Nickname" column="user_Nickname"/>
+		<result property="user_Level" column="user_Level"/>
+		<result property="user_Profile" column="user_Profile"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="review_Scope" column="review_Scope"/>
+		<result property="review_Text" column="review_Text"/>
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="review_Date" column="review_Date"/>
+		<result property="images" column="images"/>
+	</resultMap>
+	
+	<select id="selectAllReviewOdd" resultMap="reviewResult">
+		<![CDATA[
+			select a.rest_name, b.* from restaurant_info a right outer join profile_review b on b.rest_no = a.rest_no 
+			where mod(review_no,2)=1 order by review_no desc
+		]]>
+	</select>
+	<select id="selectAllReviewEven" resultMap="reviewResult">
+		<![CDATA[
+			select a.rest_name, b.* from restaurant_info a right outer join profile_review b on b.rest_no = a.rest_no 
+			where mod(review_no,2)=0 order by review_no desc
+		]]>
+	</select>
+</mapper>

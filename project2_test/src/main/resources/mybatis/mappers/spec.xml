@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.spec">
+	<resultMap id="specResult" type="SpecListVO">
+		<result property="rest_theme" column="rest_theme" />
+		<result property="rest_name" column="rest_name" />
+		<result property="rest_fileName" column="rest_fileName" />
+		<result property="rest_No" column="rest_No" />
+		<result property="rest_Address" column="rest_Address" />
+		<result property="review_text" column="review_text" />
+	</resultMap>
+	<select id="selectSpecList" resultMap="specResult">
+	<![CDATA[
+	
+select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme , ri.rest_Address
+from Restaurant_Info ri, Review_Info rw where ri.rest_theme= #{rest_theme} and ri.rest_No=rw.rest_No
+
+			]]>
+</select>
+</mapper>

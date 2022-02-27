@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+	<mapper namespace="mappers.detailReview">
+		<resultMap type="detailReviewVO" id="addNewReview">
+			<result property="user_ID" column="user_ID" />
+			<result property="review_NO" column="review_NO" />
+			<result property="review_Scope" column="review_Scope" />
+			<result property="review_Text" column="review_Text" />
+			<result property="rest_NO" column="rest_NO" />
+			<result property="review_Date" column="review_Date" />
+		</resultMap>
+		<resultMap type="imageVO" id="addNewReviewImg">
+			<result property="img_FileNO" column="img_FileNO"/>
+			<result property="img_FileName" column="img_FileName"/>
+			<result property="review_NO" column="review_NO"/>
+			<result property="rest_NO" column="rest_NO" />
+		</resultMap>
+		<insert id="addNewReview" parameterType="detailReviewVO">
+			<![CDATA[
+				insert into review_info(review_NO, user_ID, review_Scope, review_Text, rest_NO, review_Date)
+				values(review_seq.nextval, #{user_ID}, #{review_Scope}, #{review_Text}, #{rest_NO}, sysdate)
+			]]>
+		</insert>
+
+
+		<!-- <insert id="addNewReviewImg" parameterType="java.util.Map">
+			<foreach collection="list" item="item" open="insert all"
+				separator=" " close="select * from dual">
+				into reviewimg_info (img_FileNO, img_FileName, review_NO, rest_NO)
+				values (reviewIMG_seq.nextval, #{item.img_FileName}, #{item.review_NO}, #{item.rest_NO})
+			</foreach>
+		</insert> -->
+		<insert id="addNewReviewImg" parameterType="imageVO">
+			<![CDATA[
+				insert into reviewimg_info (img_FileNO, img_FileName, review_NO, rest_NO)
+				values (reviewIMG_seq.nextval, #{img_FileName}, #{review_NO}, #{rest_NO})
+			]]>
+		</insert>
+		
+		<select id="selectNewReviewNO" resultType="int">
+			<![CDATA[
+				select nvl(max(review_NO),0) + 1 from review_info
+			]]>
+		</select>
+		<select id="selectRestNO" resultType="int">
+			<![CDATA[
+				select rest_NO from review_info where review_no = (select max(review_NO) from review_info)
+			]]>
+		</select>
+
+		<delete id="deleteReview" parameterType="detailReviewVO">
+
+			<![CDATA[
+				delete from review_info where review_NO = #{review_NO}
+			]]>
+		</delete>
+		<update id="updateReview" parameterType="java.util.Map">
+			update review_info set review_Scope=#{review_Scope}, review_Text = #{review_Text}
+			<!-- <if test="imgFileName != '' and imgFileList != null">
+				, imgFileName = #{imgFileName}
+			</if> -->
+			where review_NO = #{review_NO}
+		</update>
+
+	</mapper>
+	
+	

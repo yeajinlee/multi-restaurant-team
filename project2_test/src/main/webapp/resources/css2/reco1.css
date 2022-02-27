@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url(../font/NanumBarunGothic.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  font-family: "NanumBarunGothic";
+}
+
+.navbar-default {
+    border: none;
+    background-color: salmon;
+    margin: 0px;
+    padding: 0px;
+    /* padding: 0px auto; */
+}
+
+.col-lg-6 {
+    margin-top: 30px;
+}
+
+/* .content-section-heading{
+    color: salmon;
+} */
+
+.portfolio-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-width: 530px;
+    margin: auto auto 1rem;
+    padding: 0px 0px;
+}
+
+.portfolio-item .caption {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.portfolio-item .caption .caption-content {
+    color: whitesmoke;
+    margin: auto 2rem 2rem;
+}
+
+.portfolio-item .caption .caption-content h2,
+.portfolio-item .caption .caption-content .h2 {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.portfolio-item .caption .caption-content p {
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+@media (min-width: 992px) {
+    .portfolio-item {
+        max-width: none;
+        margin: 0;
+    }
+
+    .portfolio-item .caption {
+        transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+        transition: clip-path 0.25s ease-out, background-color 0.7s;
+        transition: clip-path 0.25s ease-out, background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+        -webkit-clip-path: inset(0px);
+        clip-path: inset(0px);
+    }
+
+    .portfolio-item .caption .caption-content {
+        transition: opacity 0.25s;
+        margin-left: 5rem;
+        margin-right: 5rem;
+        margin-bottom: 5rem;
+    }
+
+    .portfolio-item img {
+        transition: -webkit-clip-path 0.25s ease-out;
+        transition: clip-path 0.25s ease-out;
+        transition: clip-path 0.25s ease-out, -webkit-clip-path 0.25s ease-out;
+        -webkit-clip-path: inset(-1px);
+        clip-path: inset(-1px);
+    }
+
+    .portfolio-item:hover img {
+        -webkit-clip-path: inset(2rem);
+        clip-path: inset(2rem);
+    }
+
+    footer {
+        width: 100%;
+        background-color: lightgrey;
+        padding: 30px 50px 50px;
+        line-height: 2rem;
+        position: relative;
+        clear: both;
+    }
+
+}
+*{
+    padding: 0;
+    margin: 0 auto;
+    }
+    
+    footer{
+        color: #fff;
+        width: 100%;
+        height: 250px;
+        background-color: rgb(255, 183, 175);
+        padding: 30px;
+      
+       }
+       footer .column1{
+        width: 20%;
+        float: left;
+      
+      }
+      
+      
+      #link2{
+        padding-left: 100px;
+      }
+      footer p{
+        line-height: 1.6;
+        font-size: 16px;
+        padding: 10px;
+        text-transform: capitalize;
+      }
+      footer ul{
+        list-style-type: none;
+        padding: 0;
+        margin:0;
+      }
+      footer .address li{
+        text-align: left;
+        align-items: center;
+      }
+      footer h2{
+        text-align: center;
+        color: #fff;
+      }
+      footer li{
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      footer .text-left{
+        text-align:left;
+       
+      
+      }
+      footer .fa{
+        padding-right: 10px;
+      }
+      footer a{
+        text-decoration: none;
+        font-size: 18px;
+        color: #fff;
+      
+      }
+      footer  .text-left1:nth-child(3){
+      text-align: center;
+      }
+      footer .bottom{
+        background: #000;
+        color: #fff;
+        padding: 0;
+        position: relative;
+        text-align: center;
+      }
+      footer .bottom p{
+        padding: 10px;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      
+      .column1 img{
+        width: 100px;
+        height: 100px;
+        }
+      

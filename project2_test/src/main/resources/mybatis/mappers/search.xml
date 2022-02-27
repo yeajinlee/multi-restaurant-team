@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.search">
+	<resultMap id="searchResult" type="SearchVO">
+		<result property="rest_NO" column="rest_NO" />
+		<result property="rest_Name" column="rest_Name" />
+		<result property="rest_Address" column="rest_Address" />
+		<result property="rest_OpenDate" column="rest_OpenDate" />
+		<result property="rest_View" column="rest_View" />
+		<result property="img_fileName" column="img_fileName" />
+	</resultMap>
+
+
+	<select id="selectBySearchWord" resultMap="searchResult"
+		parameterType="String">
+    <![CDATA[
+    
+  	SELECT ri.rest_name,ri.rest_NO,ri.rest_Address , rm.img_fileName from Restaurant_Info ri, ReviewIMG_Info rm where
+     ri.rest_NO=rm.rest_NO and rm.fileType='main_image'
+       and ri.rest_theme || ri.rest_Address||ri.rest_name like '%'|| #{searchWord} || '%'
+     order by ri.rest_OpenDate
+
+     ]]><!-- 아니면 rest_Scope desc -->
+	</select>
+
+	<select id="sideBySearchWord" resultMap="searchResult"
+		parameterType="String">
+    <![CDATA[
+    
+  	SELECT ri.rest_Name, ri.rest_NO, rm.img_fileName from Restaurant_Info ri, ReviewIMG_Info rm where
+     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
+       and ri.rest_theme || ri.rest_Address||ri.rest_name like '%'|| #{searchWord} || '%'
+     order by ri.rest_View desc
+
+     ]]><!-- 아니면 rest_Scope desc -->
+	</select>
+
+	<update id="countBy">
+    <![CDATA[
+    
+ UPDATE
+		Restaurant_Info
+	SET
+		rest_View = rest_View + 1
+	WHERE
+		rest_name = #{searchWord}
+
+     ]]></update>
+</mapper>
+
+
+
+<!-- 요것도 추가? rf.rest_address like '%'|| #{searchWord} || '%' 요것도? rf.rest_Menu 
+	like '%'|| #{searchWord} || '%' -->
+<!-- <select id="selectKeywordSearch" resultType="String" parameterType="String" 
+	> <![CDATA[ select rest_Name from Restaurant_Info where goods_title like 
+	'%'|| #{keyword} || '%' order by rest_OpenDate desc ]]> </select> -->
+
+<!-- <select id="selectSideSearch" resultType="String" parameterType="String" 
+	> <![CDATA[ select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image 
+	rm where rf.rest_NO=rm.rest_NO and rm.filetype='대표이미지' and rf.rest_Name like 
+	'%'|| #{searchWord} || '%' 요것도 추가? rf.rest_address like '%'|| #{searchWord} 
+	|| '%' 요것도? rf.rest_Menu like '%'|| #{searchWord} || '%' order by 어떤가게 논의 
+	desc ]]> -->
+  

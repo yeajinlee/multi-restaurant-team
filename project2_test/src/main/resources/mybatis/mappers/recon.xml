@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.recon">
+	<resultMap id="reconResult" type="reconListVO">
+		<result property="rest_theme" column="rest_theme" />
+	<!-- 	<result property="rest_fileName" column="rest_fileName" /> -->
+
+	</resultMap>
+	<select id="selectReconList" resultMap="reconResult">
+	<![CDATA[
+	
+	SELECT rest_theme, count(*) from Restaurant_Info group by rest_theme having count(*) >3
+	
+
+	
+			]]> <!-- 카운트 해서 4개 이하인것은 안보이게 하기!!! rest_theme count 사용 -->
+</select>
+</mapper>
